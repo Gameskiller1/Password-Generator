@@ -1,26 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RandomPasswwordGenerator</title>
+    <title>Password Generator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="card">
-        <h1>Password Generator</h1>
+<div class="card">
 
-        <!-- Password Field (shown) -->
+    <!-- Language switch -->
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+    </div>
+
+    <h1 data-i18n="title">Password Generator</h1>
+
+    <!-- Mode tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="password" data-i18n="tabPassword">Password</button>
+        <button class="tab-btn" data-tab="passphrase" data-i18n="tabPassphrase">Passphrase</button>
+    </div>
+
+    <!-- ===== PASSWORD MODE ===== -->
+    <div id="tab-password">
+
+        <!-- Password output -->
         <div class="password-box">
             <span id="password-display">Press The Button...</span>
-            <button class="copy-btn" title="Copy">📋</button>
+            <button class="copy-btn" title="Copy" data-target="password-display">📋</button>
         </div>
 
-        <!-- Password Length Slider -->
+        <!-- Strength indicator -->
+        <div class="strength-bar-wrap">
+            <div class="strength-bar">
+                <div id="strength-fill"></div>
+            </div>
+            <span id="strength-label"></span>
+        </div>
+
+        <!-- Count -->
         <div class="slider-section">
             <div class="slider-label">
-                <span>Password Length</span>
+                <span data-i18n="count">Count</span>
+                <span id="count-value">1</span>
+            </div>
+            <input type="range" id="count-slider" min="1" max="10" value="1">
+        </div>
+
+        <!-- Multiple passwords output -->
+        <div id="multi-output"></div>
+
+        <!-- Length slider -->
+        <div class="slider-section">
+            <div class="slider-label">
+                <span data-i18n="length">Password Length</span>
                 <span id="length-value">12</span>
             </div>
             <input type="range" id="length-slider" min="4" max="32" value="12">
@@ -30,25 +67,75 @@
         <div class="checkboxes">
             <label class="checkbox-item">
                 <input type="checkbox" id="lowercase" checked>
-                Lowercase Letters (a-z)
+                <span data-i18n="lowercase">Lowercase (a-z)</span>
             </label>
             <label class="checkbox-item">
                 <input type="checkbox" id="uppercase" checked>
-                Uppercase Letters (A-Z)
+                <span data-i18n="uppercase">Uppercase (A-Z)</span>
             </label>
             <label class="checkbox-item">
                 <input type="checkbox" id="numbers" checked>
-                Numbers (0-9)
+                <span data-i18n="numbers">Numbers (0-9)</span>
             </label>
             <label class="checkbox-item">
                 <input type="checkbox" id="symbols">
-                Symbols (!@#$%^&*)
+                <span data-i18n="symbols">Symbols (!@#$...)</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" id="exclude-similar">
+                <span data-i18n="excludeSimilar">Exclude similar (0O, 1lI)</span>
             </label>
         </div>
 
-        <!-- "Generate" Button -->
-        <button class="generate-btn" id="generate-btn">Generate!</button>
+        <button class="generate-btn" id="generate-btn" data-i18n="generate">Generate!</button>
     </div>
+
+    <!-- ===== PASSPHRASE MODE ===== -->
+    <div id="tab-passphrase" class="hidden">
+
+        <div class="password-box">
+            <span id="passphrase-display">Press The Button...</span>
+            <button class="copy-btn" title="Copy" data-target="passphrase-display">📋</button>
+        </div>
+
+        <!-- Strength indicator -->
+        <div class="strength-bar-wrap">
+            <div class="strength-bar">
+                <div id="strength-fill-pp"></div>
+            </div>
+            <span id="strength-label-pp"></span>
+        </div>
+
+        <div class="slider-section">
+            <div class="slider-label">
+                <span data-i18n="wordCount">Word Count</span>
+                <span id="word-count-value">4</span>
+            </div>
+            <input type="range" id="word-count-slider" min="3" max="8" value="4">
+        </div>
+
+        <div class="slider-section">
+            <div class="slider-label">
+                <span data-i18n="separator">Separator</span>
+            </div>
+            <div class="separator-options">
+                <button class="sep-btn active" data-sep="-">-</button>
+                <button class="sep-btn" data-sep=".">.</button>
+                <button class="sep-btn" data-sep="_">_</button>
+                <button class="sep-btn" data-sep=" ">space</button>
+            </div>
+        </div>
+
+        <label class="checkbox-item" style="margin-bottom:20px">
+            <input type="checkbox" id="pp-capitalize" checked>
+            <span data-i18n="capitalize">Capitalize words</span>
+        </label>
+
+        <button class="generate-btn" id="generate-pp-btn" data-i18n="generate">Generate!</button>
+    </div>
+
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
