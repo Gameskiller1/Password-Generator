@@ -93,11 +93,11 @@ function loadGoogleAnalytics() {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EYBD43HGVB');
+    gtag('config', 'G-P0T3MB5LBZ');
     
     const script = document.createElement('script');
     script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-EYBD43HGVB";
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-P0T3MB5LBZ";
     
     document.head.appendChild(script);
     
