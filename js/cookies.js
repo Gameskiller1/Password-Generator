@@ -1,7 +1,22 @@
 // ===== COOKIE CONSENT BANNER =====
 
+// ===== COOKIE CONSENT BANNER =====
+
 (function() {
     'use strict';
+
+    // ✅ Инициализируй gtag ДО использования
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // ✅ По умолчанию - запрашиваем согласие
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',              
+        'ad_personalization': 'denied',        
+        'wait_for_update': 500
+    });
 
     // Check if user already accepted/rejected cookies
     function checkCookieConsent() {
@@ -45,22 +60,37 @@
         });
     }
 
-    // Save consent and hide banner
+    // ✅ Accept: Включи Analytics
     function acceptCookies() {
         localStorage.setItem('cookieConsent', 'accepted');
-        hideBanner();
-        // Here you can enable analytics, tracking pixels, etc.
+        
+        // ✅ Обнови согласие
+        gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+        });
+
         loadGoogleAnalytics();
-        console.log('Cookies accepted');
+        hideBanner();
+        console.log('✅ Cookies accepted - Full consent granted');
     }
 
-    // Reject cookies and hide banner
+    // ✅ Reject: Отключи Analytics (ИСПРАВЛЕНО!)
     function rejectCookies() {
         localStorage.setItem('cookieConsent', 'rejected');
+        
+        // ✅ Обнови согласие (теперь синтаксис правильный!)
+        gtag('consent', 'update', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+        }); // ✅ ИСПРАВЛЕНА СКОБКА!
+        
         hideBanner();
-        // Delete existing cookies (optional)
-        deleteCookies();
-        console.log('Cookies rejected');
+        console.log('❌ Cookies rejected - All consent denied');
     }
 
     // Hide banner with animation
@@ -74,33 +104,38 @@
         }
     }
 
-    // Delete all cookies
-    function deleteCookies() {
-        document.cookie.split(";").forEach(function(c) {
-            const cookieName = c.split("=")[0].trim();
-            document.cookie = `${cookieName}=;expires=${new Date().toUTCString()};path=/`;
-        });
+    // ✅ Load Google Analytics
+    function loadGoogleAnalytics() {
+        gtag('js', new Date());
+        gtag('config', 'G-P0T3MB5LBZ');
+        gtag('event', 'page_view');
+        
+        // Load the GA script dynamically
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-P0T3MB5LBZ";
+        document.head.appendChild(script);
+        
+        console.log('📊 Google Analytics loaded');
     }
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
-        if (!checkCookieConsent()) {
+        const consent = localStorage.getItem('cookieConsent');
+        
+        if (!consent) {
+            // ✅ Нет согласия → показывай баннер
             showCookieBanner();
+        } else if (consent === 'accepted') {
+            // ✅ Уже согласился → загружай Analytics
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+            });
+            loadGoogleAnalytics();
         }
     });
-    // Google Analytics loading function
-function loadGoogleAnalytics() {
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P0T3MB5LBZ');
-    
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-P0T3MB5LBZ";
-    
-    document.head.appendChild(script);
-    
-    console.log('Google Analytics loaded');
-    }
+
 })();
