@@ -89,14 +89,18 @@
         }
     });
     // Google Analytics loading function
-    function loadGoogleAnalytics() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-EYBD43HGVB";
-    
+function loadGoogleAnalytics() {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-EYBD43HGVB');
-}
+    
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-EYBD43HGVB";
+    
+    document.head.appendChild(script);
+    
+    console.log('Google Analytics loaded');
+    }
 })();
