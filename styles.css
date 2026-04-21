@@ -1,0 +1,123 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    background-color: #16213e;
+    border-radius: 12px;
+    padding: 32px;
+    width: 380px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+}
+
+/* --- Password field --- */
+.password-box {
+    background-color: #0f3460;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.password-box span {
+    color: #e0e0e0;
+    font-size: 18px;
+    letter-spacing: 2px;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    color: #e94560;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* --- Length slider --- */
+.slider-section {
+    margin-bottom: 24px;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.slider-label span:last-child {
+    color: #e94560;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #e94560;
+    cursor: pointer;
+}
+
+/* --- Checkboxes --- */
+.checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e0e0e0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #e94560;
+    cursor: pointer;
+}
+
+/* --- Generate button --- */
+.generate-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #e94560;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background-color 0.2s;
+}
+
+.generate-btn:hover {
+    background-color: #c73652;
+}
